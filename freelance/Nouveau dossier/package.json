@@ -11,9 +11,6 @@
     "vite": "^2.9.9"
   },
   "dependencies": {
-    "fontloader": "^1.2.7",
-    "three": "^0.128.0",
-    "three-globe": "^2.24.5",
-    "three-text-geometry": "^0.0.0"
+    "three": "^0.142.0"
   }
 }
