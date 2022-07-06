@@ -7,3 +7,28 @@ body { margin: 0; }
 	bottom: 0;
 	background-color: #040d21;
 }
+#circle{
+  width: 80px;
+  height: 80px;
+  border: 1px solid #3c2946;
+  position:fixed;
+  border-radius:50%;
+}
+@media (hover: hover) and (pointer: fine) {
+  #cursor {
+    z-index: 99;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  #cursor .cursor--inner {
+    width: 1.5vw;
+    height: 1.5vw;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: solid 1px #ffffff;
+  }
+}
