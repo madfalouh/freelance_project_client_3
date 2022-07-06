@@ -170,6 +170,7 @@ function initGlobe() {
 
   Globe.rotateY(-Math.PI * (5 / 9));
   Globe.rotateZ(-Math.PI / 6);
+  Globe.position.x-=120
   const globeMaterial = Globe.globeMaterial();
   globeMaterial.color = new Color(0x000080);
   globeMaterial.emissive = new Color(0x2200);
