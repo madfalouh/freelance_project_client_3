@@ -24,6 +24,7 @@ function loop() {
 requestAnimationFrame(loop);
 
 import ThreeGlobe from 'three-globe';
+import * as THREE from 'three' ; 
 import { WebGLRenderer, Scene } from "three";
 import {
   PerspectiveCamera,
@@ -94,26 +95,11 @@ function init() {
   scene.fog = new Fog(0x535ef3, 400, 2000);
 
   // Helpers
-  // const axesHelper = new AxesHelper(800);
-  // scene.add(axesHelper);
-  // var helper = new DirectionalLightHelper(dLight);
-  // scene.add(helper);
-  // var helperCamera = new CameraHelper(dLight.shadow.camera);
-  // scene.add(helperCamera);
+
 
   // Initialize controls
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.dynamicDampingFactor = 0.01;
-  controls.enablePan = false;
-
-  controls.rotateSpeed = 0.8;
-  controls.zoomSpeed = 1;
-  controls.autoRotate = false;
-
-  controls.minPolarAngle = Math.PI / 3.5;
-  controls.maxPolarAngle = Math.PI - Math.PI / 3;
-
+controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping=true
   window.addEventListener("resize", onWindowResize, false);
   document.addEventListener("mousemove", onMouseMove);
 }
@@ -133,7 +119,7 @@ function initGlobe() {
     .atmosphereAltitude(0.25)
     .hexPolygonColor((e) => {
       if (
-        ["MAR","KGZ", "KOR", "THA", "RUS", "UZB", "IDN", "KAZ", "MYS"].includes(
+        ["MAR","KGZ", "KOR", "THA", "RUS", "UZB", "IDN", "KAZ", "MYS","USA"].includes(
           e.properties.ISO_A3
         )
       ) {
@@ -168,19 +154,27 @@ function initGlobe() {
       .pointRadius(0.05);
   }, 1000);
 
+  
   Globe.rotateY(-Math.PI * (5 / 9));
   Globe.rotateZ(-Math.PI / 6);
-  Globe.position.x-=120
+ 
+
   const globeMaterial = Globe.globeMaterial();
   globeMaterial.color = new Color(0x000080);
   globeMaterial.emissive = new Color(0x2200);
   globeMaterial.emissiveIntensity = 0.1;
   globeMaterial.shininess = 0.7;
-
+Globe.position.x=-120;
   // NOTE Cool stuff
   // globeMaterial.wireframe = true;
+ 
 
   scene.add(Globe);
+
+
+
+
+
 }
 
 function onMouseMove(event) {
@@ -200,7 +194,7 @@ function onWindowResize() {
 
 function animate() {
   Globe.rotateY(0.003)
-  camera.lookAt(scene.position);
+  camera.lookAt(new THREE.Vector3(0,0,0))
   controls.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
