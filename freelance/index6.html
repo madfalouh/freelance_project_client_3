@@ -16,37 +16,11 @@
 		supportsCssVars() || alert("Please view this demo in a modern browser that supports CSS Variables.");
 		</script>
 	</head>
-	<body class="demo-1">
-		<main>
-			<div class="frame">
-				<div class="frame__title-wrap">
-					<h1 class="frame__title">Infinite Lights</h1>
-					<div class="frame__links">
-						<a href="https://tympanus.net/Development/webGLImageTransitions/">Previous demo</a>
-						<a href="https://tympanus.net/codrops/?p=44516">Article</a>
-						<a href="https://github.com/Anemolo/InfiniteLights">GitHub</a>
-					</div>
-				</div>
-				<div class="frame__info">Hint: Press to speed up</div>
-				<div class="frame__demos">
-					<a href="index.html" class="frame__demo frame__demo--current">interstate 1</a>
-					<a href="index2.html" class="frame__demo">interstate 2</a>
-					<a href="index3.html" class="frame__demo">interstate 3</a>
-					<a href="index4.html" class="frame__demo">interstate 4</a>
-					<a href="index5.html" class="frame__demo">interstate 5</a>
-					<a href="index6.html" class="frame__demo">interstate 6</a>
-					<a href="index7.html" class="frame__demo">interstate 7</a>
-				</div>
-			</div>
-			<div class="content">
+	<body class="demo-6">
+
+
 				<div id="app"></div>
-				<div class="content__title-wrap">
-					<span class="content__pretitle">Indigo Road Systems</span>
-					<h2 class="content__title">Traffic Ohio</h2>
-					<a class="content__link" href="#">Live updates</a>
-				</div>
-			</div>
-		</main>
+
 		<script src="js/three.min.js"></script>
 		<script src="js/postprocessing.min.js"></script>
 		<script src="js/InfiniteLights.js"></script>
@@ -62,10 +36,10 @@
 				onSlowDown: (ev) => {
 				},
 				// mountainDistortion || LongRaceDistortion || xyDistortion || turbulentDistortion || turbulentDistortionStill || deepDistortionStill || deepDistortion
-				distortion: mountainDistortion, 
+				distortion: deepDistortionStill, 
 				
 				length: 400,
-				roadWidth: 9,
+				roadWidth: 18,
 				islandWidth: 2,
 				lanesPerRoad: 3,
 
@@ -111,9 +85,9 @@
 					shoulderLines: 0x131318,
 					brokenLines: 0x131318,
 					/***  Only these colors can be an array ***/
-					leftCars: [0xff102a, 0xEB383E, 0xff102a],
-					rightCars: [0xdadafa, 0xBEBAE3, 0x8F97E4],
-					sticks: 0xdadafa,
+					leftCars: [0xFF322F, 0xA33010, 0xA81508],
+					rightCars: [0xFDFDF0, 0xF3DEA0, 0xE2BB88],
+					sticks: 0xFDFDF0,
 				}
 			};
 
