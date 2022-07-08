@@ -25,7 +25,7 @@ let mouseY = 0;
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
 var Globe;
-
+import {MeshLine,MeshLineMaterial,MeshLineRaycast} from 'three.meshline'
 init();
 animate();
 
@@ -74,27 +74,28 @@ function init() {
   controls.zoomSpeed = 1;
   controls.autoRotate = false;
 
-  controls.minPolarAngle = Math.PI / 3.5;
-  controls.maxPolarAngle = Math.PI - Math.PI / 3;
-
-
 const curve = new THREE.SplineCurve( [
-
-	new THREE.Vector2( 0, 0 ),
+	new THREE.Vector2( 0, 50 ),
 	new THREE.Vector2( 0, 0 ),
 	new THREE.Vector2( 50, -90 ),
 	new THREE.Vector2( 200, -10 )
 ] );
 
 const points = curve.getPoints( 250 );
-const geometry = new THREE.BufferGeometry().setFromPoints( points );
+const geometry = new THREE.BufferGeometry().setFromPoints(points);
+const line = new MeshLine();
+line.setGeometry(geometry);
 
-const material = new THREE.LineBasicMaterial( { color: 0xff0000  , linewidth:50} );
 
-// Create the final object to add to the scene
-const splineObject = new THREE.Line( geometry, material );
 
-scene.add(splineObject)
+
+var material = new MeshLineMaterial({color: new THREE.Color(0xffff00), lineWidth:10 }) ; 
+
+var mesh = new THREE.Mesh(line , material)
+
+
+scene.add(mesh)
+
 }
 
 
