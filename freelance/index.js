@@ -87,13 +87,69 @@ const line = new MeshLine();
 line.setGeometry(geometry);
 
 
+const curve1 = new THREE.SplineCurve( [
+	new THREE.Vector2( 0, 0 ),
+	new THREE.Vector2(0, 0 ),
+	new THREE.Vector2( 30, 10 ),
+	new THREE.Vector2( 40, 30 ),
+	new THREE.Vector2( 100, 30 ),
+
+] );
+
+const points1 = curve1.getPoints( 250 );
+const geometry1 = new THREE.BufferGeometry().setFromPoints(points1);
+const line1 = new MeshLine();
+line1.setGeometry(geometry1);
+
+var material1 = new MeshLineMaterial({color: new THREE.Color(0xff0000), lineWidth:2 }) ; 
+
+const curve2 = new THREE.SplineCurve( [
+	new THREE.Vector2( 0, 0 ),
+	new THREE.Vector2(0, 0 ),
+	new THREE.Vector2( 30, 10 ),
+	new THREE.Vector2( 40, 30 ),
+	new THREE.Vector2( 100, 30 ),
+
+] );
+
+const points2 = curve2.getPoints( 250 );
+const geometry2 = new THREE.BufferGeometry().setFromPoints(points2);
+const line2 = new MeshLine();
+line2.setGeometry(geometry2);
+
+var material2 = new MeshLineMaterial({color: new THREE.Color(0xff0000), lineWidth:2 }) ; 
+
+var mesh1 = new THREE.Mesh(line2 , material2)
 
 
-var material = new MeshLineMaterial({color: new THREE.Color(0xffff00), lineWidth:10 }) ; 
+
+
+
+var material = new MeshLineMaterial({color: new THREE.Color(0xff0000), lineWidth:5 }) ; 
 
 var mesh = new THREE.Mesh(line , material)
+var mesh1 = new THREE.Mesh(line1 , material1)
+var mesh2 = new THREE.Mesh(line2 , material2)
+scene.add(mesh1)
+scene.add(mesh2)
+
+mesh.rotateX(Math.PI*0.65)
+mesh.rotateY(-Math.PI*0.5)
+mesh.rotateZ(Math.PI*0.58)
 
 
+mesh1.rotateX(15)
+mesh1.rotateY(0)
+mesh1.rotateZ(5)
+
+mesh2.rotateX(15)
+mesh2.rotateY(3)
+mesh2.rotateZ(5)
+
+mesh1.position.x=1
+mesh1.position.y=-100
+
+mesh2.position.y=-60
 scene.add(mesh)
 
 }
