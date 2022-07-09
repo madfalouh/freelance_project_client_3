@@ -151,7 +151,7 @@ mesh1.position.y=-100
 
 mesh2.position.y=-60
 scene.add(mesh)
-
+initL()
 }
 
 
