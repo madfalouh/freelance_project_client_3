@@ -107,11 +107,11 @@ composer.addPass( renderScene );
 composer.addPass( bloomPass );
 
 
- curve = new THREE.SplineCurve( [
-	new THREE.Vector2( 0, 50 ),
-	new THREE.Vector2( 0, 0 ),
-	new THREE.Vector2( 50, -90 ),
-	new THREE.Vector2( 200, -10 )
+ curve = new THREE.CatmullRomCurve3( [
+	new THREE.Vector3( 0, 50 ,0),
+	new THREE.Vector3( 0, 0 ,0),
+	new THREE.Vector3( 50, -90 ,0),
+	new THREE.Vector3( 200, -10,0 )
 ] );
 
 const points = curve.getPoints( 250 );
@@ -166,9 +166,7 @@ var mesh2 = new THREE.Mesh(line2 , material2)
 scene.add(mesh1)
 scene.add(mesh2)
 
-mesh.rotateX(Math.PI*0.65)
-mesh.rotateY(-Math.PI*0.5)
-mesh.rotateZ(Math.PI*0.58)
+
 
 mesh.layers.disable(BLOOM_SCENE)
 mesh1.rotateX(15)
@@ -210,24 +208,14 @@ function animate() {
   requestAnimationFrame(animate);
 	composer.render();
 
-if(cylinderc.position.y<-105){
-cylinderc.position.y+=0.40
-cylinderc.position.z+=0.35
-}
 
 
 fraction += 0.001; 
-	if ( fraction >= 0.65  && cylinderc.position.y>-105 ) {
-	
-		
-		cylinderc.position.y-=0.20
-		
-	}else if ( fraction < 0.65 ){
-
- cylinderc.position.y=curve.getPoint(fraction).y
-}
 
 
+cylinderc.position.x=curve.getPoint(fraction).x
+cylinderc.position.y=curve.getPoint(fraction).y
+cylinderc.position.z=curve.getPoint(fraction).z
 
 
 
