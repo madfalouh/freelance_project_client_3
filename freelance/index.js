@@ -212,7 +212,7 @@ function animate() {
 
 if(cylinderc.position.y<-105){
 cylinderc.position.y+=0.40
-cylinderc.position.z+=0.25
+cylinderc.position.z+=0.35
 }
 
 
@@ -220,7 +220,7 @@ fraction += 0.001;
 	if ( fraction >= 0.65  && cylinderc.position.y>-105 ) {
 	
 		
-		cylinderc.position.y-=0.020
+		cylinderc.position.y-=0.20
 		
 	}else if ( fraction < 0.65 ){
 
