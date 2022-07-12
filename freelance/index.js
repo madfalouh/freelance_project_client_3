@@ -19,14 +19,35 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import countries from "./files/globe-data-min.json";
 import travelHistory from "./files/my-flights.json";
 import airportHistory from "./files/my-airports.json";
-var renderer, camera, scene, controls;
+
+
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+
+			const params = {
+				exposure: 1,
+				bloomStrength: .05,
+				bloomThreshold: 0,
+				bloomRadius: 215,
+				scene: 'Scene with Glow'
+
+			};
+
+const ENTIRE_SCENE = 0, BLOOM_SCENE = 1;
+
+		const bloomLayer = new THREE.Layers();
+			bloomLayer.set( BLOOM_SCENE );
+var renderer, camera, scene, controls,composer;
 let mouseX = 0;
 let mouseY = 0;
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
 var Globe;
 import {MeshLine,MeshLineMaterial,MeshLineRaycast} from 'three.meshline'
-init();
+init()
 animate();
 
 // SECTION Initializing core ThreeJS elements
@@ -73,6 +94,17 @@ function init() {
   controls.rotateSpeed = 0.8;
   controls.zoomSpeed = 1;
   controls.autoRotate = false;
+const bloomLayer = new THREE.Layers();
+bloomLayer.set( BLOOM_SCENE );
+const renderScene = new RenderPass( scene, camera );
+const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+bloomPass.threshold = params.bloomThreshold;
+bloomPass.strength = params.bloomStrength;
+bloomPass.radius = params.bloomRadius;
+composer = new EffectComposer( renderer );
+composer.addPass( renderScene );
+composer.addPass( bloomPass );
+
 
 const curve = new THREE.SplineCurve( [
 	new THREE.Vector2( 0, 50 ),
@@ -125,7 +157,7 @@ var mesh1 = new THREE.Mesh(line2 , material2)
 
 
 
-var material = new MeshLineMaterial({color: new THREE.Color(0xff0000), lineWidth:5 }) ; 
+var material = new MeshLineMaterial({color: new THREE.Color(0xFF0000), lineWidth:5 }) ; 
 
 var mesh = new THREE.Mesh(line , material)
 var mesh1 = new THREE.Mesh(line1 , material1)
@@ -137,7 +169,7 @@ mesh.rotateX(Math.PI*0.65)
 mesh.rotateY(-Math.PI*0.5)
 mesh.rotateZ(Math.PI*0.58)
 
-
+mesh.layers.disable(BLOOM_SCENE)
 mesh1.rotateX(15)
 mesh1.rotateY(0)
 mesh1.rotateZ(5)
@@ -151,12 +183,13 @@ mesh1.position.y=-100
 
 mesh2.position.y=-60
 scene.add(mesh)
-initL()
+
 }
 
 
 function animate() {
-  controls.update();
-  renderer.render(scene, camera);
+	composer.render();
+  //controls.update();
+  //renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }
