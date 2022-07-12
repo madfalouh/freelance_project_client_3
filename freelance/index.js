@@ -25,6 +25,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { Flow } from 'three/examples/jsm/modifiers/CurveModifier';
 
 
 			const params = {
@@ -40,7 +41,7 @@ const ENTIRE_SCENE = 0, BLOOM_SCENE = 1;
 
 		const bloomLayer = new THREE.Layers();
 			bloomLayer.set( BLOOM_SCENE );
-var renderer, camera, scene, controls,composer;
+var renderer, camera, scene, controls,composer,cylinderc,curve,flow,fraction=0.1;
 let mouseX = 0;
 let mouseY = 0;
 let windowHalfX = window.innerWidth / 2;
@@ -106,7 +107,7 @@ composer.addPass( renderScene );
 composer.addPass( bloomPass );
 
 
-const curve = new THREE.SplineCurve( [
+ curve = new THREE.SplineCurve( [
 	new THREE.Vector2( 0, 50 ),
 	new THREE.Vector2( 0, 0 ),
 	new THREE.Vector2( 50, -90 ),
@@ -183,13 +184,66 @@ mesh1.position.y=-100
 
 mesh2.position.y=-60
 scene.add(mesh)
+const geometryc = new THREE.CylinderGeometry( 5, 5, 20, 32 );
+const materialc = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+cylinderc = new THREE.Mesh( geometryc, materialc );
+scene.add( cylinderc );
+
+cylinderc.position.y=0
+cylinderc.position.z=0
+cylinderc.rotateX(Math.PI/2-0.3)
+
+
+const geometryr = new THREE.BoxGeometry( 0.2, 0.08, 0.05 );
+const materialr = new THREE.MeshPhongMaterial( { color: 0x99ffff, wireframe: false } );
+const objectToCurver = new THREE.Mesh( geometryr, materialr );
+
+flow = new Flow( objectToCurver ); 
+flow.updateCurve( 0, curve );
+scene.add( flow.object3D );
+
 
 }
-
 
 function animate() {
+
+  requestAnimationFrame(animate);
 	composer.render();
+
+fraction += 0.001; 
+
+	if ( fraction >= 0.7 ) {
+	
+		cylinderc.position.z+=0.1
+		cylinderc.position.y+=0.020
+		
+	}else{
+
+ cylinderc.position.y=curve.getPoint(fraction).y
+}
+
+
+
+
+
+
+
+
+
   //controls.update();
   //renderer.render(scene, camera);
-  requestAnimationFrame(animate);
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
