@@ -210,17 +210,25 @@ function animate() {
   requestAnimationFrame(animate);
 	composer.render();
 
-fraction += 0.001; 
+if(cylinderc.position.y<-105){
+cylinderc.position.y+=0.40
+cylinderc.position.z+=0.25
+}
 
-	if ( fraction >= 0.7 ) {
+
+fraction += 0.001; 
+	if ( fraction >= 0.65  && cylinderc.position.y>-105 ) {
 	
-		cylinderc.position.z+=0.1
-		cylinderc.position.y+=0.020
 		
-	}else{
+		cylinderc.position.y-=0.020
+		
+	}else if ( fraction < 0.65 ){
 
  cylinderc.position.y=curve.getPoint(fraction).y
 }
+
+
+
 
 
 
