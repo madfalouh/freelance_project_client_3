@@ -82,7 +82,7 @@ function init() {
   dLight2.position.set(-200, 500, 200);
   camera.add(dLight2);
 
-  camera.position.z = 300;
+  camera.position.z = 900;
   camera.position.x = 0;
   camera.position.y = 0;
   scene.add(camera);
@@ -109,9 +109,9 @@ composer.addPass( bloomPass );
 
  curve = new THREE.CatmullRomCurve3( [
 	new THREE.Vector3( 0, 50 ,0),
-	new THREE.Vector3( 0, 0 ,0),
-	new THREE.Vector3( 50, -90 ,0),
-	new THREE.Vector3( 200, -10,0 )
+	new THREE.Vector3( 0, 10 ,0),
+	new THREE.Vector3( 0, -90 ,0),
+	new THREE.Vector3( 0, -80,150 )
 ] );
 
 const points = curve.getPoints( 250 );
@@ -182,7 +182,7 @@ mesh1.position.y=-100
 
 mesh2.position.y=-60
 scene.add(mesh)
-const geometryc = new THREE.CylinderGeometry( 5, 5, 20, 32 );
+const geometryc = new THREE.CylinderGeometry( 1, 1, 20, 32 );
 const materialc = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 cylinderc = new THREE.Mesh( geometryc, materialc );
 scene.add( cylinderc );
