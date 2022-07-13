@@ -209,14 +209,14 @@ function animate() {
 	composer.render();
 
 
-
 fraction += 0.001; 
+
+
 
 
 cylinderc.position.x=curve.getPoint(fraction).x
 cylinderc.position.y=curve.getPoint(fraction).y
 cylinderc.position.z=curve.getPoint(fraction).z
-
 
 
 
