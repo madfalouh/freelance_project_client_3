@@ -82,7 +82,7 @@ function init() {
   dLight2.position.set(-200, 500, 200);
   camera.add(dLight2);
 
-  camera.position.z = 900;
+  camera.position.z = 300;
   camera.position.x = 0;
   camera.position.y = 0;
   scene.add(camera);
@@ -181,7 +181,7 @@ mesh1.position.x=1
 mesh1.position.y=-100
 
 mesh2.position.y=-60
-scene.add(mesh)
+//scene.add(mesh)
 const geometryc = new THREE.CylinderGeometry( 1, 1, 20, 32 );
 const materialc = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 cylinderc = new THREE.Mesh( geometryc, materialc );
@@ -200,6 +200,7 @@ flow = new Flow( objectToCurver );
 flow.updateCurve( 0, curve );
 scene.add( flow.object3D );
 
+cylinderc.rotateX(Math.PI/2+0.35)
 
 }
 
@@ -210,9 +211,6 @@ function animate() {
 
 
 fraction += 0.001; 
-
-
-
 
 cylinderc.position.x=curve.getPoint(fraction).x
 cylinderc.position.y=curve.getPoint(fraction).y
